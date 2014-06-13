@@ -1,6 +1,7 @@
 var enue={};
 enue.common={};
 enue.common.utils={};
+//Deal with array
 enue.common.utils.getArrMinimum=function(arr){
 	var low=0;
 	for (var i = 1; i < arr.length; i++) {
@@ -21,4 +22,17 @@ enue.common.utils.dealArrReapeat=function(arr){
         }
     }
     return res;
+}
+
+
+//Deal with String
+enue.common.utils.getStringLength=function(str){
+ 	var len=str.length,bytes=len;
+ 	for(var i=0;i<len;i++){
+ 		debugger;
+	   	if(str.charCodeAt(i)>255){
+	  		bytes++;
+   		}
+	}
+ 	return bytes;
 }
