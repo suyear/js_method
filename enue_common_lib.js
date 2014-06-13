@@ -1,5 +1,5 @@
 var enue=enue || {};
-enue.utils=(function(){
+enue.utils=function(){
 	var self={};
 
  	/*
@@ -75,5 +75,5 @@ enue.utils=(function(){
 	};
 
 	return self;
-}());
+};
 
