@@ -29,7 +29,6 @@ enue.common.utils.dealArrReapeat=function(arr){
 enue.common.utils.getStringLength=function(str){
  	var len=str.length,bytes=len;
  	for(var i=0;i<len;i++){
- 		debugger;
 	   	if(str.charCodeAt(i)>255){
 	  		bytes++;
    		}
