@@ -4,16 +4,14 @@
 	<title>Js_method测试</title>
 	<meta charset="UTF-8">
     <meta name="renderer" content="webkit">
-	<script type="text/javascript" src="./enue_common_lib.js"></script>
+	<script type="text/javascript" src="./enue_common_lib_frame.js"></script>
 	<script type="text/javascript">
-
-	var enueObj = new enue.utils();
 	var arr=[1,2,3,2,4,1,'red','blue','red'];
-	var resultArr=enueObj.dealArrReapeat(arr);
+	var resultArr=enue.dealArrReapeat(arr);
 
 	var str="你好,hello World";
 	console.log(str.length)
-	console.log(enueObj.getStringLength(str))
+	console.log(enue.getStringLength(str))
 	console.log(resultArr);
 	</script>
 
