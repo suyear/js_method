@@ -1,0 +1,104 @@
+<!doctype html> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>获取新浪短网址</title> 
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script> 
+<!--<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>--> 
+</head> 
+<body> 
+电话号码：
+<textarea id="telephone" col='10' row='5'>
+
+</textarea>
+结果：
+<textarea id="result" col='10' row='5'>
+
+</textarea>
+
+<input type='button' value='转换' id='convert'/>
+</body> 
+
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript"> 
+function generateUrl(url){ 
+	var api = "http://api.weibo.com/2/short_url/shorten.json"; 
+	var app_key = "211160679";
+	var _url = api + "?source=" + app_key + "&url_long=" + url; 
+	var message=""; 
+	$.ajax({ //底层方法； 
+		url: _url, 
+		type: "GET", 
+		dataType: "jsonp", //使用JSONP方法进行AJAX,json有跨域问题； 
+		cache: false, 
+		success: function (data, status) { 
+			document.write(data.data.urls[0].url_short); 
+		}, 
+		error: function(obj,info,errObj){ 
+			console.log("error" + info);
+		} 
+	}); 
+} 
+
+var phoneDeal={
+	docOne:[],
+	docTwo:[],
+	resultArr:[],
+	init:function(){
+		var phones=$("#telephone").val().split("\n");
+		for (var i = 0; i < phones.length; i+=2) {
+			var phone01=phones[i];
+			var phone02=phones[i+1];
+			if(phone01!=''){
+				this.docOne.push(phone01);
+			}
+			if(phone02!=''){
+				this.docTwo.push(phone02);
+			}
+		}		
+	},
+	generateUrl:function(url,type,phone){
+		var api = "http://api.weibo.com/2/short_url/shorten.json"; 
+		var app_key = "211160679";
+		var _url = api + "?source=" + app_key + "&url_long=" + url; 
+		var message=""; 
+		$.ajax({ //底层方法； 
+			url: _url, 
+			type: "GET", 
+			dataType: "jsonp", //使用JSONP方法进行AJAX,json有跨域问题； 
+			cache: false, 
+			success: function (data, status) { 
+				//console.log(type + "===" + phone + "," +data.data.urls[0].url_short); 
+				$("#result").val($("#result").val()+"\n"+phone + "," +data.data.urls[0].url_short);
+				console.log(phone + "," +data.data.urls[0].url_short); 
+			}, 
+			error: function(obj,info,errObj){ 
+				console.log("error" + info);
+			} 
+		}); 
+	},
+	returnResult:function(){
+		for (var i = 0; i < this.docOne.length ; i++) {
+			var url="http://www.juximao.com/active/aimi_mobile_wx.html?s=m_"+this.docOne[i];
+			this.generateUrl(url,'part01',this.docOne[i]);
+		};
+
+		for (var i = 0; i < this.docTwo.length ; i++) {
+			var url="http://www.juximao.com/active/aimi_mobile_wx.html?s=m_"+this.docTwo[i];
+			this.generateUrl(url,'part02',this.docTwo[i]);
+		};
+	}
+}
+
+$("#convert").click(function(){
+	phoneDeal.init();
+	phoneDeal.returnResult();
+
+});
+
+//phoneDeal.docOne;
+//console.log(phoneDeal.docTwo);
+
+//phoneDeal.generateUrl("http://www.juximao.com");
+</script> 
+</html> 
